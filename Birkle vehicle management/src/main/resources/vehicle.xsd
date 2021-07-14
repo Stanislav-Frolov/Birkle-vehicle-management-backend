@@ -1,0 +1,28 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://spring.io/guides/gs-producing-web-service"
+	targetNamespace="http://spring.io/guides/gs-producing-web-service"
+	elementFormDefault="qualified">
+	<xs:element name="vehicle">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="brand" type="xs:string" />
+				<xs:element name="model" type="xs:string" />
+				<xs:element name="type" type="xs:string" />
+				<xs:element name="plate_country" type="xs:string" />
+				<xs:element name="plate_number" type="xs:string" />
+				<xs:element name="vin" type="xs:string" />
+				<xs:element name="creation_date" type="xs:string" />
+				<xs:element name="manufactored_country" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="response">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="message" type="xs:string" />
+			</xs:all>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

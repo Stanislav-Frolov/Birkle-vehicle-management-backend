@@ -1,0 +1,16 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+				  xmlns:gs="http://spring.io/guides/gs-producing-web-service">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <gs:vehicle>
+         <gs:brand>HONDA</gs:brand>
+         <gs:model>5d</gs:model>
+         <gs:type>COUPE</gs:type>
+         <gs:plate_country>EE</gs:plate_country>
+         <gs:plate_number>123xxx</gs:plate_number>
+         <gs:vin>11122233344455566</gs:vin>
+         <gs:creation_date>2007-12-03T10:15:30+01:00</gs:creation_date>
+         <gs:manufactored_country>EE</gs:manufactored_country>
+      </gs:vehicle>
+   </soapenv:Body>
+</soapenv:Envelope>

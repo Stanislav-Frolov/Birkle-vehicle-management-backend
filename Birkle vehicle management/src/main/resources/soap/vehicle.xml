@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<vehicle xmlns="http://spring.io/guides/gs-producing-web-service">
+<brand>HONDA</brand>
+<type>COUPE</type>
+<plate_number>EE</plate_number>
+<vin>JH4DA3350GS005185</vin>
+<creation_date>2021-07-09T14:01:17.869+03:00</creation_date>
+</vehicle>
