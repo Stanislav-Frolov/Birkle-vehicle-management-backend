@@ -1,0 +1,129 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.2
+-- Dumped by pg_dump version 13.2
+
+-- Started on 2021-07-13 13:28:07
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 7 (class 2615 OID 16428)
+-- Name: vehicle_management; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA vehicle_management;
+
+
+ALTER SCHEMA vehicle_management OWNER TO postgres;
+
+--
+-- TOC entry 2 (class 3079 OID 16384)
+-- Name: adminpack; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS adminpack WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2993 (class 0 OID 0)
+-- Dependencies: 2
+-- Name: EXTENSION adminpack; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION adminpack IS 'administrative functions for PostgreSQL';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 203 (class 1259 OID 16434)
+-- Name: vehicle; Type: TABLE; Schema: vehicle_management; Owner: postgres
+--
+
+CREATE TABLE vehicle_management.vehicle (
+    id bigint NOT NULL,
+    brand character varying(20) NOT NULL,
+    model character varying(20),
+    type character varying(20) NOT NULL,
+    plate_country character varying(3),
+    plate_number character varying(10),
+    vin character varying(17) NOT NULL,
+    creation_date timestamp with time zone,
+    manufactored_country character varying(3)
+);
+
+
+ALTER TABLE vehicle_management.vehicle OWNER TO postgres;
+
+--
+-- TOC entry 202 (class 1259 OID 16432)
+-- Name: vehicle_ID_seq; Type: SEQUENCE; Schema: vehicle_management; Owner: postgres
+--
+
+ALTER TABLE vehicle_management.vehicle ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME vehicle_management."vehicle_ID_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 2987 (class 0 OID 16434)
+-- Dependencies: 203
+-- Data for Name: vehicle; Type: TABLE DATA; Schema: vehicle_management; Owner: postgres
+--
+
+COPY vehicle_management.vehicle (id, brand, model, type, plate_country, plate_number, vin, creation_date, manufactored_country) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2994 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: vehicle_ID_seq; Type: SEQUENCE SET; Schema: vehicle_management; Owner: postgres
+--
+
+SELECT pg_catalog.setval('vehicle_management."vehicle_ID_seq"', 12, true);
+
+
+--
+-- TOC entry 2853 (class 2606 OID 16443)
+-- Name: vehicle vehicle_pkey; Type: CONSTRAINT; Schema: vehicle_management; Owner: postgres
+--
+
+ALTER TABLE ONLY vehicle_management.vehicle
+    ADD CONSTRAINT vehicle_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 2855 (class 2606 OID 16440)
+-- Name: vehicle vehicle_vin_key; Type: CONSTRAINT; Schema: vehicle_management; Owner: postgres
+--
+
+ALTER TABLE ONLY vehicle_management.vehicle
+    ADD CONSTRAINT vehicle_vin_key UNIQUE (vin);
+
+
+-- Completed on 2021-07-13 13:28:07
+
+--
+-- PostgreSQL database dump complete
+--
+
