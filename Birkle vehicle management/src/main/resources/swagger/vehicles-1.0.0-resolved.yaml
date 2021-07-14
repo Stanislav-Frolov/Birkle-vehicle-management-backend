@@ -1,0 +1,208 @@
+---
+openapi: 3.0.0
+info:
+  title: vehicles
+  description: vehicles API
+  contact:
+    email: none@dot.com
+  version: 1.0.0
+servers:
+- url: http://localhost:8080/
+  description: localhost
+tags:
+- name: developers
+  description: Operations available to regular developers
+paths:
+  /create:
+    post:
+      tags:
+      - developers
+      requestBody:
+        description: save vehicle to DB
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vehicle'
+            example:
+              $ref: '#/components/examples/Vehicle'
+        required: true
+      responses:
+        "200":
+          description: returns created entity primary key
+          content:
+            text/plain:
+              schema:
+                type: string
+                format: int64
+        "500":
+          description: sent by global exception handler
+          content:
+            text/plain:
+              schema:
+                type: string
+  /vehicles:
+    get:
+      tags:
+      - developers
+      responses:
+        "200":
+          description: get all vehicles from DB
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vehicle'
+        "500":
+          description: sent by global exception handler
+          content:
+            text/plain:
+              schema:
+                type: string
+  /findVehicle/{vehiclePK}:
+    get:
+      tags:
+      - developers
+      parameters:
+      - name: vehiclePK
+        in: path
+        description: vehicle Primary key
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: int64
+      responses:
+        "200":
+          description: find vehicle by given Primary key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vehicle'
+        "500":
+          description: sent by global exception handler
+          content:
+            text/plain:
+              schema:
+                type: string
+  /update/{vehiclePK}:
+    post:
+      tags:
+      - developers
+      parameters:
+      - name: vehiclePK
+        in: path
+        description: vehicle Primary key
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: int64
+      requestBody:
+        description: update vehicle with given PK
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vehicle'
+            example:
+              $ref: '#/components/examples/Vehicle'
+        required: true
+      responses:
+        "200":
+          description: vehicle updated
+          content:
+            text/plain:
+              schema:
+                type: string
+        "500":
+          description: sent by global exception handler
+          content:
+            text/plain:
+              schema:
+                type: string
+  /delete/{vehiclePK}:
+    get:
+      tags:
+      - developers
+      parameters:
+      - name: vehiclePK
+        in: path
+        description: vehicle Primary key
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+          format: int64
+      responses:
+        "200":
+          description: vehicle deleted
+          content:
+            text/plain:
+              schema:
+                type: boolean
+        "500":
+          description: sent by global exception handler
+          content:
+            text/plain:
+              schema:
+                type: string
+components:
+  schemas:
+    Vehicle:
+      required:
+      - brand
+      - creationDate
+      - type
+      - vin
+      type: object
+      properties:
+        brand:
+          type: string
+        model:
+          type: string
+        type:
+          type: string
+        plateCountry:
+          type: string
+        plateNumber:
+          type: string
+        vin:
+          type: string
+        creationDate:
+          pattern: yyyy-MM-ddTHH:mm:ssZZZZ
+          type: string
+        manufactoredCountry:
+          type: string
+  responses:
+    "500":
+      description: sent by global exception handler
+      content:
+        text/plain:
+          schema:
+            type: string
+  parameters:
+    vehiclePK:
+      name: vehiclePK
+      in: path
+      description: vehicle Primary key
+      required: true
+      style: simple
+      explode: false
+      schema:
+        type: string
+        format: int64
+  examples:
+    Vehicle:
+      summary: vehicle example
+      value:
+        brand: HONDA
+        model: 5d
+        type: COUPE
+        plateCountry: EE
+        plateNumber: 111-XXX
+        vin: JH4DA3350GS005185
+        creationDate: 2021-07-09T14:01:17.869+03:00
+        manufactoredCountry: EE
